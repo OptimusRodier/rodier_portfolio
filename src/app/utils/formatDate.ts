@@ -1,20 +1,15 @@
-export function formatDate(date: string) {
+export function formatDate(date: string, includeRelative = true) {
   const currentDate = new Date();
 
-  // 🔐 Fix: make sure date is not undefined or null
-  if (!date || !date.includes("T")) {
+  if (!date.includes("T")) {
     date = `${date}T00:00:00`;
   }
 
-  const postDate = new Date(date);
-  const diffTime = Math.abs(currentDate.getTime() - postDate.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const givenDate = new Date(date);
 
-  if (diffDays <= 1) return "Today";
-  if (diffDays === 1) return "Yesterday";
-  return postDate.toLocaleDateString("en-US", {
+  const fullDate = givenDate.toLocaleDateString("en-US", {
     year: "numeric",
-    month: "short",
+    month: "long",
     day: "numeric",
   });
 
@@ -22,5 +17,16 @@ export function formatDate(date: string) {
     return fullDate;
   }
 
-  return `${fullDate} (${formattedDate})`;
+  const diffInMs = currentDate.getTime() - givenDate.getTime();
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+  if (diffInDays === 0) {
+    return "Today";
+  } else if (diffInDays === 1) {
+    return "Yesterday";
+  } else if (diffInDays < 7) {
+    return `${diffInDays} days ago`;
+  } else {
+    return fullDate;
+  }
 }
