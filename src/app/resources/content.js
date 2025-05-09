@@ -42,6 +42,13 @@ const social = [
     icon: "email",
     link: `mailto:${person.email}`,
   },
+  {
+    name: "Download PDF version",
+    icon: "document",
+    link: "/Rodier_Resume_Final.pdf", // Place resume.pdf inside /public folder
+    download: true, // Optional, some components might use this
+  },
+  
 ];
 
 const home = {
