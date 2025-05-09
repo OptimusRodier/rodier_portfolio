@@ -1,16 +1,16 @@
 import { Logo } from "@/once-ui/components";
 
 const person = {
-  firstName: "Selene",
-  lastName: "Yu",
+  firstName: "Rodier Eyas",
+  lastName: "Sangibala",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  role: "System, Data and Integration Analst",
+  avatar: "/images/ro.jpg",
+  email: "rodier.sangibala@chezyo.com",
+  location: "Europe/Warsaw", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: ["English", "French", "Lingala","Kikongo"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter = {
@@ -18,8 +18,7 @@ const newsletter = {
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
   description: (
     <>
-      I occasionally write about design, technology, and share thoughts on the intersection of
-      creativity and engineering.
+      I occasionally talk about DR Congo Politics outside of my work and innovative ideas.
     </>
   ),
 };
@@ -27,20 +26,16 @@ const newsletter = {
 const social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
-  {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/once-ui-system/nextjs-starter",
-  },
+
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/rodier-eyas-sangibala-5b3026b1/",
   },
   {
-    name: "X",
+    name: "",
     icon: "x",
-    link: "",
+    link: "https://x.com/rodiersangibala?s=21",
   },
   {
     name: "Email",
@@ -55,24 +50,24 @@ const home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
-  featured: {
+  headline: <>Hello! Rodier here...</>,
+  /*featured: {
     display: true,
-    title: <>Recent project: <strong className="ml-4">Once UI</strong></>,
+    /*title: <>Recent project: <strong className="ml-4">Once UI</strong></>,
     href: "/work/building-once-ui-a-customizable-design-system",
-  },
+  },*/
   subline: (
     <>
-      I'm Selene, a design engineer at <Logo icon={false} style={{ display: "inline-flex", top: "0.25em", marginLeft: "-0.25em" }}/>, where I craft intuitive
-      <br /> user experiences. After hours, I build my own projects.
+      Founder of <a href="https://chezyo.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">chezyo.com</a>, Integration Analyst at <strong className="text-lg font-bold">Awin</strong>, and strategist helping brands connect data, platforms, and people through scalable systems — with clarity and precision.
     </>
   ),
 };
 
+
 const about = {
   path: "/about",
   label: "About",
-  title: `About – ${person.name}`,
+  title: `Explore my full resume`,
   description: `Meet ${person.name}, ${person.role} from ${person.location}`,
   tableOfContent: {
     display: true,
@@ -83,16 +78,17 @@ const about = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "https://cal.com/rsangibala",
   },
   intro: {
     display: true,
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        I’m a systems, data, and integration analyst with a passion for making technology work seamlessly. At Awin Global, I specialize in brand integration, personally developing prebuilt tracking codes and plugins for e-commerce platforms and Google Tag Manager (GTM). I work directly with brands to ensure smooth transaction tracking, leveraging SQL to monitor performance and optimize implementations. My time at Awin has deepened my expertise in e-commerce tracking, cloud-server tracking, and API integrations, forming the backbone of my understanding of digital commerce and data-driven optimization.
+Beyond corporate experience, I’m also the Founder & CEO of Chezyo.com, an e-commerce platform in DR Congo, where I oversee tech operations, website management, and business strategy. Additionally, as a Co-founder and Board Member of LIFE TIME GROUP ENTERPRISE, I help turn ideas into businesses—either by launching them ourselves or crafting strategies for others to scale.
+I thrive at the crossroads of technology, strategy, and problem-solving. Whether it’s optimizing tracking setups, making data-driven decisions, or brainstorming new business models, I bring an analytical mind with a creative edge. Oh, and if there’s ever a tracking puzzle to solve, chances are, I’ve already built the solution.
+
       </>
     ),
   },
@@ -101,42 +97,93 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Awin Global",
+        timeframe: "August 2022 - Present",
+        role: "Global Technical Integrations Analyst",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+Led technical onboarding for 300+ brands, boosting implementation sign-offs by 537%.
+Implemented tracking via GTM, API, and plugins; used SQL for monitoring and reporting.
+
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+          Improved team efficiency through training, documentation, and dashboard optimization.
           </>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
+          //{
+           // src: "/images/projects/project-01/cover-01.jpg",
+            //alt: "Once UI Project",
+            //width: 16,
+            //height: 9,
+         // },-->
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "ChezYo Coo/chezyo.com",
+        timeframe: "March 2023 - Present",
+        role: "Founder & CEO",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+Founder & CEO of <a href="https://chezyo.com" target="_blank" rel="noopener noreferrer">chezyo.com</a>, an e-commerce platform in DR Congo. 
+I built and financed the business, overseeing website development, tech operations, invoicing, and digital marketing. 
+
+With warehouses in Kinshasa and Lubumbashi, I manage logistics remotely while my team handles fulfillment and customer engagement
+          </>,
+        ],
+        images: [
+          // optional: leave the array empty if you don't want to display images
+          //{
+           // src: "/images/projects/project-01/cover-01.jpg",
+            //alt: "Once UI Project",
+            //width: 16,
+            //height: 9,
+         // },-->
+        ],
+      },
+      {
+        company: "Diebold Nixdorf",
+        timeframe: "February 2022 - July 2022",
+        role: "Technical Support Specialist with French",
+        achievements: [
+          <>
+Provided remote support for POS systems, payment terminals, digital safes, and gas pumps across retail environments.         </>,
+          <>
+Used diagnostic tools to troubleshoot, reboot, and resolve system issues, ensuring minimal downtime and smooth client operations.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Capgemini",
+        timeframe: "September 2020 - January 2022",
+        role: "Desktop Analyst with French",
+        achievements: [
+          <>
+Provided remote IT support via calls, chat, and email, resolving 95% of tickets within SLA. 
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+Managed incidents using ServiceNow, handled troubleshooting across Windows and network tools.
           </>,
+           <>
+Maintained documentation, mentored new joiners, and improved internal support processes
+           </>,
+        ],
+        images: [],
+      },
+      {
+        company: "JLL",
+        timeframe: "2021 - 2021",
+        role: "Helpdesk Data Analyst",
+        achievements: [
+          <>
+Worked within a fast-paced corporate IT environment to support data-driven service operations. Collected and cleaned ticketing data from SQL Server, Oracle, and AWS data warehouses to identify inefficiencies across support workflows.
+Used Alteryx and Excel for preprocessing and automation, enabling clearer reporting and better decision-making.
+Assisted in root cause analysis of recurring issues and collaborated with internal teams to propose actionable solutions.
+Delivered insights through data visualization tools like Tableau and Amazon QuickSight to improve quality monitoring, streamline service delivery, and enhance the end-user experience.         </>,
+          
+          
         ],
         images: [],
       },
@@ -147,23 +194,31 @@ const about = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "Czestochowa University of Technology",
+        description: <>Master's degree, Computational Intelligence and Data Mining</>,
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Sharda University",
+        description: <>Bachelor’s Degree, Computer Application - Software Engineering</>,
+      },
+      {
+        name: "EDX Online",
+        description: <>Projects management</>,
+      },
+      {
+        name: " National Degree",
+        description: <>Mathematics & Physics</>,
       },
     ],
   },
   technical: {
     display: true, // set to false to hide this section
-    title: "Technical skills",
+    title: "Skills",
     skills: [
       {
-        title: "Figma",
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
-        // optional: leave the array empty if you don't want to display images
+        title: "Technical & Programming:",
+        description: <>Python, SQL, C++, JavaScript, PHP, API Integrations.</>,
+        /*// optional: leave the array empty if you don't want to display images
         images: [
           {
             src: "/images/projects/project-01/cover-02.jpg",
@@ -177,12 +232,12 @@ const about = {
             width: 16,
             height: 9,
           },
-        ],
+        ],*/
       },
       {
-        title: "Next.js",
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
-        // optional: leave the array empty if you don't want to display images
+        title: "Data & Analytics:",
+        description: <>Google Tag Manager (GTM), GA4, Server-side tracking, Cloud systems</>,
+        /*// optional: leave the array empty if you don't want to display images
         images: [
           {
             src: "/images/projects/project-01/cover-04.jpg",
@@ -190,8 +245,18 @@ const about = {
             width: 16,
             height: 9,
           },
-        ],
+        ],*/
       },
+      {
+      title: "Networking & Systems:",
+        description: <>DNS, SSL, VPN, POS systems, Citrix</>,
+      
+      },
+      {
+        title: "Business & Strategy:",
+          description: <>Negotiations, Project management, CRM</>,
+        
+        },
     ],
   },
 };

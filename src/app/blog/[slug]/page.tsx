@@ -3,9 +3,8 @@ import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
 import { AvatarGroup, Button, Column, Heading, HeadingNav, Icon, Row, Text } from "@/once-ui/components";
 import { about, blog, person, baseURL } from "@/app/resources";
-import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
-import { Metadata } from 'next';
+import { Metadata } from "next";
 import { Meta, Schema } from "@/once-ui/modules";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
@@ -21,9 +20,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string | string[] }>;
 }): Promise<Metadata> {
   const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug) ? routeParams.slug.join('/') : routeParams.slug || '';
+  const slugPath = Array.isArray(routeParams.slug) ? routeParams.slug.join("/") : routeParams.slug || "";
 
-  const posts = getPosts(["src", "app", "blog", "posts"])
+  const posts = getPosts(["src", "app", "blog", "posts"]);
   let post = posts.find((post) => post.slug === slugPath);
 
   if (!post) return {};
@@ -37,26 +36,24 @@ export async function generateMetadata({
   });
 }
 
-export default async function Blog({
-  params
-}: { params: Promise<{ slug: string | string[] }> }) {
+export default async function Blog({ params }: { params: Promise<{ slug: string | string[] }> }) {
   const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug) ? routeParams.slug.join('/') : routeParams.slug || '';
+  const slugPath = Array.isArray(routeParams.slug) ? routeParams.slug.join("/") : routeParams.slug || "";
 
-  let post = getPosts(["src", "app", "blog", "posts"]).find((post) => post.slug === slugPath);
+  const posts = getPosts(["src", "app", "blog", "posts"]);
+  const post = posts.find((post) => post.slug === slugPath);
 
   if (!post) {
     notFound();
   }
 
-  const avatars =
-    post.metadata.team?.map((person) => ({
-      src: person.avatar,
-    })) || [];
+  const avatars = post.metadata.team?.map((person) => ({
+    src: person.avatar,
+  })) || [];
 
   return (
     <Row fillWidth>
-      <Row maxWidth={12} hide="m"/>
+      <Row maxWidth={12} hide="m" />
       <Row fillWidth horizontal="center">
         <Column as="section" maxWidth="xs" gap="l">
           <Schema
@@ -65,8 +62,8 @@ export default async function Blog({
             path={`${blog.path}/${post.slug}`}
             title={post.metadata.title}
             description={post.metadata.summary}
-            datePublished={post.metadata.publishedAt}
-            dateModified={post.metadata.publishedAt}
+            datePublished={post.metadata.publishedAt || new Date().toISOString()} // Ensuring a valid date
+            dateModified={post.metadata.publishedAt || new Date().toISOString()}
             image={`${baseURL}/og?title=${encodeURIComponent(post.metadata.title)}`}
             author={{
               name: person.name,
@@ -80,29 +77,25 @@ export default async function Blog({
           <Heading variant="display-strong-s">{post.metadata.title}</Heading>
           <Row gap="12" vertical="center">
             {avatars.length > 0 && <AvatarGroup size="s" avatars={avatars} />}
-            <Text variant="body-default-s" onBackground="neutral-weak">
-              {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-            </Text>
+            {post.metadata.publishedAt && typeof post.metadata.publishedAt === "string" ? (
+              <Text variant="body-default-s" onBackground="neutral-weak">
+                {post.metadata.publishedAt}
+              </Text>
+            ) : null}
           </Row>
           <Column as="article" fillWidth>
             <CustomMDX source={post.content} />
           </Column>
           <ScrollToHash />
         </Column>
-    </Row>
-    <Column maxWidth={12} paddingLeft="40" fitHeight position="sticky" top="80" gap="16" hide="m">
-      <Row
-        gap="12"
-        paddingLeft="2"
-        vertical="center"
-        onBackground="neutral-medium"
-        textVariant="label-default-s"
-      >
-        <Icon name="document" size="xs" />
-        On this page
       </Row>
-      <HeadingNav fitHeight/>
-    </Column>
+      <Column maxWidth={12} paddingLeft="40" fitHeight position="sticky" top="80" gap="16" hide="m">
+        <Row gap="12" paddingLeft="2" vertical="center" onBackground="neutral-medium" textVariant="label-default-s">
+          <Icon name="document" size="xs" />
+          On this page
+        </Row>
+        <HeadingNav fitHeight />
+      </Column>
     </Row>
   );
 }
