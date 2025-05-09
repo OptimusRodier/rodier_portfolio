@@ -58,11 +58,11 @@ const home = {
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: <>Hello! Rodier here...</>,
-  /*featured: {
-    display: true,
+  featured: {
+    display: false,
     title: <>Recent project: <strong className="ml-4">Chezyo</strong></>,
     href: "https://chezyo.com", // You can link to a case study or external site
-  },*/
+  },
   subline: (
     <>
       Founder of <a href="https://chezyo.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">chezyo.com</a>, Integration Analyst at <strong className="text-lg font-bold">Awin</strong>, and strategist helping brands connect data, platforms, and people through scalable systems — with clarity and precision.
