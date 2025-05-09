@@ -225,6 +225,7 @@ Delivered insights through data visualization tools like Tableau and Amazon Quic
       {
         title: "Technical & Programming:",
         description: <>Python, SQL, C++, JavaScript, PHP, API Integrations.</>,
+        images: [],
         /*// optional: leave the array empty if you don't want to display images
         images: [
           {
@@ -244,6 +245,7 @@ Delivered insights through data visualization tools like Tableau and Amazon Quic
       {
         title: "Data & Analytics:",
         description: <>Google Tag Manager (GTM), GA4, Server-side tracking, Cloud systems</>,
+        images: [],
         /*// optional: leave the array empty if you don't want to display images
         images: [
           {
@@ -257,11 +259,13 @@ Delivered insights through data visualization tools like Tableau and Amazon Quic
       {
       title: "Networking & Systems:",
         description: <>DNS, SSL, VPN, POS systems, Citrix</>,
+        images: [],
       
       },
       {
         title: "Business & Strategy:",
           description: <>Negotiations, Project management, CRM</>,
+          images: [],
         
         },
     ],
