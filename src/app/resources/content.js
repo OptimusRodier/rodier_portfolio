@@ -264,7 +264,7 @@ Delivered insights through data visualization tools like Tableau and Amazon Quic
 const blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
+  title: "The views expressed here are my own and should not be associated with my professional work.",
   description: `Read what ${person.name} has been up to recently`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route

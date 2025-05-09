@@ -1,11 +1,11 @@
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL = "https://demo.magic-portfolio.com";
+const baseURL = "https://rodiersangibala.chezyo.com/";
 
 const routes = {
   "/": true,
   "/about": true,
-  "/work": true,
-  "/blog": false,
+  "/work": false,
+  "/blog": true,
   "/gallery": false,
 };
 
