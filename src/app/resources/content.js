@@ -73,7 +73,7 @@ const home = {
 
 const about = {
   path: "/about",
-  label: "About",
+  label: "About me",
   title: `Explore my full resume`,
   description: `Meet ${person.name}, ${person.role} from ${person.location}`,
   tableOfContent: {
@@ -293,7 +293,7 @@ const gallery = {
   description: `A photo collection by ${person.name}`,
   // Images by https://lorant.one
   // These are placeholder images, replace with your own
-  images: [
+  images: [/*
     {
       src: "/images/gallery/horizontal-1.jpg",
       alt: "image",
@@ -333,7 +333,7 @@ const gallery = {
       src: "/images/gallery/vertical-4.jpg",
       alt: "image",
       orientation: "vertical",
-    },
+    },*/
   ],
 };
 
