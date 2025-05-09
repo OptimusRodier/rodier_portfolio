@@ -30,7 +30,7 @@ export default function Gallery() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <MasonryGrid images={gallery.images?.filter(image => image?.src)} />
+      <MasonryGrid images={gallery.images?.filter(image => image?.src) ?? []} />
     </Flex>
   );
 }
