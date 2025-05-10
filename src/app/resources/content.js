@@ -194,6 +194,16 @@ Delivered insights through data visualization tools like Tableau and Amazon Quic
         ],
         images: [],
       },
+      {
+        company: "LIFETIME GROUP ENTREPRISE",
+        timeframe: "June 2018 - Present",
+        role: "Co-Founder, Chairman & Former Project Manager",
+        achievements: [
+          <>
+Co-founded and led strategic growth while also managing projects during the startup phase. Since 2021, I have focused solely on governance and board leadership.         </>,
+        ],
+        images: [],
+      },
     ],
   },
   studies: {
