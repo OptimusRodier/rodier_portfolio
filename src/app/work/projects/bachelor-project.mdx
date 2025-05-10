@@ -1,0 +1,45 @@
+---
+title: "Local Intranet Messaging System for Enterprises"
+publishedAt: "2017-06-15"
+summary: "Development of a secure, offline-ready internal communication system using PHP, MySQL, and local network infrastructure to enable employee messaging without reliance on external internet services."
+images:
+  - "/images/LMS.png"
+
+team:
+  - name: "Rodier Sangibala"
+    role: "Author – BCA Final Year Project"
+    avatar: "/images/ro.jpg"
+---
+
+## Overview
+
+This project proposes a lightweight, database-driven email system for use within a local enterprise network. Built to eliminate dependence on external internet providers or platforms like Gmail, the system enables staff to log in, send messages, and attach files internally — using a secure interface hosted locally.
+
+## Key Contributions
+
+- **Local-Only Architecture**: Designed and tested an offline messaging system accessible via intranet, with no internet connection needed.
+- **User Authentication**: Built a login mechanism tied to employee IDs and hashed passwords, with strict access control for messages.
+- **Email-like Interface**: Developed an intuitive UI for composing, sending, and reading internal emails — including keyword search and file attachment.
+- **Database Design**: Implemented MySQL tables for users, messages, and access logs, ensuring data privacy and modularity.
+
+## Technologies Used
+
+- **PHP**: Backend scripting for authentication, routing, and message encryption.
+- **MySQL**: Relational database for storing users and messages securely.
+- **HTML/CSS/JS**: Frontend interface mimicking standard email clients.
+- **XAMPP**: Local server environment for hosting the entire stack.
+- **Browsers**: Multi-instance browser testing for simulating user sessions.
+
+## Challenges and Learnings
+
+The primary challenge was simulating secure multi-user behavior on a single machine. This led to creative testing using browser tabs and sessions. Designing an email system that respected both user privacy and admin monitoring needs also required careful planning around encryption, data access, and role-based visibility.
+
+## Outcome
+
+The final system functioned successfully on a local machine with four simulated users. Messages were securely routed, and unauthorized access was blocked. The concept demonstrated strong potential for local network integration in enterprise environments where privacy, speed, and internet independence are priorities.
+
+## Reference
+
+[PHP Official Docs](https://www.php.net)  
+[MySQL Manual](https://dev.mysql.com/doc/)  
+[XAMPP Server Tools](https://www.apachefriends.org/)  
