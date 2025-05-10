@@ -59,9 +59,9 @@ const home = {
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: <>Hello! Rodier here...</>,
   featured: {
-    /*display: false,
-    title: <>Recent project: <strong className="ml-4">Chezyo</strong></>,
-    href: "https://chezyo.com", // You can link to a case study or external site*/
+    display: false,
+    title: <>Projects: <strong className="ml-4">Academic Papers and reseach</strong></>,
+    href: "/work", // You can link to a case study or external site*/
   },
   subline: (
     <>
