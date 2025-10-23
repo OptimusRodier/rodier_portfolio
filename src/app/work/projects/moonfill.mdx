@@ -1,0 +1,75 @@
+---
+title: "Moonfill Smart Automated Moonpull Form Filler"
+date: "2025-10-23"
+thumbnail: "/images/moonfill.png"
+---
+
+## Overview
+
+Moonfill is a lightweight browser extension developed to automate repetitive tasks for the internal **Awin Global Integration** team.  
+It seamlessly integrates with Salesforce to detect **Awin advertiser records**, extract key fields like the **MID** and **Country of the program**, and prefill a Microsoft Office form used by the integration team.
+
+The tool eliminates manual copy–paste routines and reduces form completion time from minutes to seconds — improving accuracy and consistency across teams.
+
+---
+
+## Key Features
+
+### 🧠 Context-Aware Detection
+Moonfill automatically detects when users are viewing a Salesforce record. Once the page is ready, it scans the DOM for relevant Awin fields such as the **Advertiser ID (MID)** and **Country of the program**, applying internal GEO logic to convert the country name into an international region code.
+
+### 🎨 Seamless UI Integration
+Moonfill includes a polished **HTML popup interface** that appears when users click the extension icon.  
+The popup allows users to manually enter the **MID**, select the **Region Geo Code** from a dropdown, and click a prominent **“Submit”** button to trigger the data injection.
+
+![Moonfill Popup Interface](/images/popup.png)
+
+When a valid record is detected from the URL, Moonfill injects a visually integrated button directly into the Salesforce interface.
+
+![Moonfill Button](/images/button1.png)
+
+The button sits naturally within the Salesforce card layout and allows one-click submission of prefilled forms.
+
+### ⚠️ Smart Validation
+If the detected MID is invalid or shorter than 3 digits, Moonfill automatically disables interaction and shows a neutral grey state to prevent accidental submissions.
+
+![Disabled Button for Invalid MID](/images/button2.png)
+
+### 🚀 One-Click Automation
+Upon activation, Moonfill opens the pre-configured Microsoft Form, fills in the relevant advertiser data, and submits automatically after confirming that all required fields are valid.  
+The form includes live validation logic and even detects the “thank you” confirmation message before closing the tab — ensuring a clean, uninterrupted workflow.
+
+### 💾 Persistent Local Storage
+Advertiser ID (MID) and GEO data are cached using Chrome’s local storage API to maintain quick access and cross-tab consistency without privacy risk.
+
+---
+
+## Technologies Used
+
+- **JavaScript (ES6)** — Core logic and event handling  
+- **Chrome Extension APIs** — For background messaging, DOM injection, and storage  
+- **HTML & CSS** — Clean UI components styled to match Awin’s design language  
+- **Microsoft Forms** — Target form for automation and submission  
+- **Session Storage** — Used to store intermediate data during automation flow  
+
+---
+
+## Challenges and Learnings
+
+Developing a plugin that operates inside Salesforce’s dynamic and shadow-DOM-heavy environment required deep understanding of asynchronous DOM rendering.  
+Moonfill uses smart polling and conditional retries to detect when Salesforce elements are fully available before injecting its components.
+
+Balancing reliability with performance — ensuring the button only appears when relevant fields exist — was one of the most rewarding aspects of the project.
+
+---
+
+## Outcome
+
+Moonfill has reduced average Moonpull form submission time by **over 80%**, helping the integration team optimize efficiency while maintaining data accuracy.  
+The tool has become a trusted internal assistant and continues to evolve with user feedback, supporting the wider automation goals across the Awin ecosystem.
+
+---
+
+## Project Source Code
+
+[GitHub](https://github.com/OptimusRodier/moonfill)
