@@ -78,21 +78,15 @@ export default async function Project({
         </Button>
         <Heading variant="display-strong-s">{post.metadata.title}</Heading>
       </Column>
-     {post.metadata.images.length > 0 && (
-  <SmartImage
-    priority
-    fillWidth
-    radius="m"
-    alt={post.metadata.title}
-    src={post.metadata.images[0]}
-    style={{
-      objectFit: "contain",
-      maxHeight: "600px",
-      backgroundColor: "var(--surface-weak)",
-    }}
-  />
-)}
-
+      {post.metadata.images.length > 0 && (
+        <SmartImage
+          priority
+          aspectRatio="16 / 9"
+          radius="m"
+          alt="image"
+          src={post.metadata.images[0]}
+        />
+      )}
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
         <Flex gap="12" marginBottom="24" vertical="center">
           {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="m" />}
