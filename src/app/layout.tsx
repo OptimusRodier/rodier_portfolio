@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import classNames from "classnames";
 
 import { Footer, Header, RouteGuard } from "@/components";
+import { HtmlLang } from "@/components/HtmlLang";
 import { baseURL, effects, style, font, home } from "@/app/resources";
 
 import { Background, Column, Flex, ThemeProvider, ToastProvider } from "@/once-ui/components";
@@ -53,6 +54,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                try {
+                  const p = location.pathname;
+                  document.documentElement.lang = (p === '/fr' || p.indexOf('/fr/') === 0) ? 'fr' : 'en';
+                } catch (e) {}
                 try {
                   const theme = localStorage.getItem('theme') || 'system';
                   const root = document.documentElement;
@@ -114,6 +119,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                 color: effects.lines.color,
               }}
             />
+            <HtmlLang />
             <Flex fillWidth minHeight="16" hide="s"></Flex>
             <Header />
             <Flex
