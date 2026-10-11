@@ -8,7 +8,7 @@ const person = {
   },
   role: "System, Data and Integration Analyst",
   avatar: "/images/ro-square.jpg",
-  email: "rodier.sangibala@chezyo.com",
+  email: "sangirodier@gmail.com",
   location: "Paris", // City shown in the header (top left)
   timeZone: "Europe/Paris", // IANA time zone used for the clock in the header
   languages: ["English", "French", "Lingala","Kikongo"], // optional: Leave the array empty if you don't want to display languages

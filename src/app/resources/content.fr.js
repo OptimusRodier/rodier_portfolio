@@ -9,7 +9,7 @@ const person = {
   },
   role: "Analyste Systèmes, Données et Intégration",
   avatar: "/images/ro-square.jpg",
-  email: "rodier.sangibala@chezyo.com",
+  email: "sangirodier@gmail.com",
   location: "Paris",
   timeZone: "Europe/Paris",
   languages: ["Anglais", "Français", "Lingala", "Kikongo"],
