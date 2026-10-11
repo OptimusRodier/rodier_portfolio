@@ -1,0 +1,80 @@
+---
+title: "Moonfill : lancez un scan Moonpull depuis Salesforce en un clic"
+publishedAt: "2025-10-23"
+summary: "Moonfill est une extension de navigateur pour l'équipe **Awin Global Integration**. Depuis une fiche Salesforce, un clic suffit pour soumettre le scan d'intégration Moonpull, attendre le résultat et le publier automatiquement dans le fil **Chatter** de la fiche — plus de formulaire à remplir, plus de copier-coller."
+images:
+- "/images/moonfill.webp"
+
+team:
+  - name: "Rodier Sangibala"
+    role: "Auteur et développeur"
+    avatar: "/images/ro-square.jpg"
+---
+
+## Présentation
+
+Moonfill est une extension de navigateur conçue pour les agents Awin. Avant, lancer un scan d'intégration Moonpull voulait dire remplir le formulaire Moonpull, attendre le résultat dans Teams, le copier puis le coller dans Salesforce.
+
+Désormais, l'agent clique sur un bouton sur la fiche du programme et Moonfill fait tout le reste : il lit le programme, le **MID** et le **pays** depuis la fiche, soumet le formulaire, suit le scan et publie le résultat dans le fil Chatter de la fiche.
+
+---
+
+## Pourquoi c'est utile
+
+- **Un seul clic.** Plus besoin de saisir le MID ou la région, plus de formulaire à remplir, plus de copier-coller.
+- **Rien à retenir.** Le programme, le MID et le pays viennent directement de la fiche Salesforce.
+- **Du temps pour autre chose.** Pendant que le scan tourne (généralement jusqu'à 10 minutes), l'agent peut utiliser d'autres onglets et d'autres applications.
+- **Plusieurs scans en parallèle.** Les scans peuvent tourner en même temps, pour le même client ou des clients différents, et chaque résultat va sur sa propre fiche.
+- **Toujours visible.** Un clic sur l'icône de l'extension montre ce qui est en cours, ce qui est terminé et ce qui demande de l'attention, avec un historique des derniers scans.
+
+---
+
+## Comment ça marche
+
+1. Sur la fiche Salesforce du programme, l'agent clique sur **Submit Moonpull form**.
+2. Un onglet de formulaire s'ouvre, se remplit tout seul, soumet et se ferme. Cela prend environ 25 secondes, puis l'agent est de retour sur la fiche.
+3. Moonfill attend la fin du scan en arrière-plan.
+4. Quand le résultat est prêt, Moonfill ouvre la fiche en arrière-plan, publie le résultat dans son fil **Chatter** et affiche une notification.
+
+Chaque scan passe par des états clairs : envoi du formulaire, en cours (avec un chronomètre en direct), publication dans Salesforce, puis terminé. En cas d'échec, le message explique pourquoi, pour que l'agent sache quoi faire ensuite.
+
+---
+
+## Conçu pour être sûr
+
+- **Le résultat doit correspondre au scan.** Avant de publier, Moonfill vérifie que le résultat appartient bien au MID scanné. Sinon, rien n'est publié.
+- **Un filet de sécurité pour chaque échec.** En cas de problème, un bouton **Force paste** et un bouton **Copy result** sont à un clic, et le message Teams arrive toujours comme d'habitude : il existe donc toujours une copie.
+- **Les fiches invalides sont bloquées.** Si le MID détecté est absent ou invalide, le bouton est désactivé pour éviter les envois accidentels.
+- **Une empreinte minimale.** Moonfill ne communique qu'avec Microsoft Forms, le dossier des résultats Moonpull et Salesforce, avec les identifiants de l'agent. La liste des scans est stockée uniquement sur l'ordinateur de l'agent.
+
+---
+
+## Technologies utilisées
+
+- **JavaScript (ES6)** — logique principale, gestion d'état et événements
+- **API d'extensions de navigateur (Chrome et Edge)** — messagerie en arrière-plan, onglets, notifications, injection dans le DOM et stockage
+- **HTML et CSS** — une fenêtre compacte qui affiche les scans en cours, les résultats et l'historique
+- **Salesforce (Chatter)** — détection des fiches et publication des résultats
+- **Microsoft Forms et Microsoft 365** — le formulaire soumis et le dossier partagé des résultats lu par l'extension
+
+---
+
+## Défis et enseignements
+
+Travailler dans l'interface dynamique de Salesforce, très orientée shadow DOM, demande une bonne compréhension du rendu asynchrone. Moonfill utilise un sondage intelligent et des tentatives conditionnelles pour attendre que les bons éléments existent avant d'agir.
+
+Le vrai défi, c'était la fiabilité : les scans durent plusieurs minutes, les navigateurs sont réduits, les sessions expirent et plusieurs scans peuvent se chevaucher. Prévoir ces cas — garder l'état de chaque scan séparé, reprendre quand le navigateur est rouvert, et patienter quand le navigateur est masqué parce que Salesforce ne peut pas afficher sa page en arrière-plan — a compté davantage que le cas idéal.
+
+---
+
+## Résultat
+
+La première version de Moonfill a réduit le temps de soumission du formulaire Moonpull de **plus de 80 %**. La version actuelle va plus loin en supprimant l'attente, la copie et le collage qui suivaient le scan, tout en garantissant l'exactitude des données grâce à la vérification du MID.
+
+L'outil est devenu un assistant interne de confiance pour l'équipe d'intégration et continue d'évoluer avec les retours des utilisateurs.
+
+---
+
+## Code source du projet
+
+[GitHub](https://github.com/OptimusRodier/moonfill)

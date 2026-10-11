@@ -1,0 +1,45 @@
+---
+title: "Système de messagerie intranet local pour les entreprises"
+publishedAt: "2017-06-15"
+summary: "Développement d'un système de communication interne sécurisé, utilisable hors ligne, basé sur PHP, MySQL et l'infrastructure du réseau local, pour permettre aux employés de s'écrire sans dépendre de services internet externes."
+images:
+  - "/images/LMS.webp"
+
+team:
+  - name: "Rodier Sangibala"
+    role: "Auteur – Projet de fin d'études de licence (BCA)"
+    avatar: "/images/ro-square.jpg"
+---
+
+## Présentation
+
+Ce projet propose un système de messagerie léger, adossé à une base de données, pour un réseau d'entreprise local. Conçu pour se passer de fournisseurs internet externes ou de plateformes comme Gmail, il permet au personnel de se connecter, d'envoyer des messages et de joindre des fichiers en interne, via une interface sécurisée hébergée localement.
+
+## Principales contributions
+
+- **Architecture 100 % locale** : conception et test d'un système de messagerie hors ligne accessible via l'intranet, sans aucune connexion internet.
+- **Authentification des utilisateurs** : mécanisme de connexion lié aux identifiants des employés et à des mots de passe hachés, avec un contrôle d'accès strict aux messages.
+- **Interface de type e-mail** : développement d'une interface intuitive pour écrire, envoyer et lire des e-mails internes, avec recherche par mots-clés et pièces jointes.
+- **Conception de la base de données** : implémentation de tables MySQL pour les utilisateurs, les messages et les journaux d'accès, garantissant confidentialité et modularité.
+
+## Technologies utilisées
+
+- **PHP** : scripts côté serveur pour l'authentification, le routage et le chiffrement des messages.
+- **MySQL** : base de données relationnelle pour stocker utilisateurs et messages en toute sécurité.
+- **HTML/CSS/JS** : interface imitant les clients de messagerie classiques.
+- **XAMPP** : environnement serveur local hébergeant toute la pile.
+- **Navigateurs** : tests multi-instances pour simuler des sessions utilisateur.
+
+## Défis et enseignements
+
+Le principal défi était de simuler un comportement multi-utilisateur sécurisé sur une seule machine, ce qui a conduit à des tests créatifs avec des onglets et des sessions de navigateur. Concevoir un système de messagerie qui respecte à la fois la vie privée des utilisateurs et les besoins de supervision des administrateurs a aussi demandé une planification rigoureuse du chiffrement, de l'accès aux données et de la visibilité selon les rôles.
+
+## Résultat
+
+Le système final a fonctionné avec succès sur une machine locale avec quatre utilisateurs simulés. Les messages étaient acheminés de façon sécurisée et les accès non autorisés bloqués. Le concept a montré un fort potentiel pour l'intégration à des réseaux locaux d'entreprise où confidentialité, rapidité et indépendance vis-à-vis d'internet sont des priorités.
+
+## Référence
+
+[Documentation officielle de PHP](https://www.php.net)  
+[Manuel MySQL](https://dev.mysql.com/doc/)  
+[Outils serveur XAMPP](https://www.apachefriends.org/)  

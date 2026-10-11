@@ -4,6 +4,7 @@ import { mailchimp } from "@/app/resources";
 import { Button, Flex, Heading, Input, Text, Background, Column } from "@/once-ui/components";
 import { opacity, SpacingToken } from "@/once-ui/types";
 import { useState } from "react";
+import { ui, type Locale } from "@/app/resources/i18n";
 
 function debounce<T extends (...args: any[]) => void>(func: T, delay: number): T {
   let timeout: ReturnType<typeof setTimeout>;
@@ -19,7 +20,14 @@ type NewsletterProps = {
   description: string | JSX.Element;
 };
 
-export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
+export const Mailchimp = ({
+  newsletter,
+  locale = "en",
+}: {
+  newsletter: NewsletterProps;
+  locale?: Locale;
+}) => {
+  const t = ui[locale];
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [touched, setTouched] = useState<boolean>(false);
@@ -38,7 +46,7 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
     setEmail(value);
 
     if (!validateEmail(value)) {
-      setError("Please enter a valid email address.");
+      setError(t.invalidEmail);
     } else {
       setError("");
     }
@@ -49,7 +57,7 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
   const handleBlur = () => {
     setTouched(true);
     if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
+      setError(t.invalidEmail);
     }
   };
 
@@ -175,8 +183,8 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
           </div>
           <div className="clear">
             <Flex height="48" vertical="center">
-              <Button id="mc-embedded-subscribe" value="Subscribe" size="m" fillWidth>
-                Subscribe
+              <Button id="mc-embedded-subscribe" value={t.subscribe} size="m" fillWidth>
+                {t.subscribe}
               </Button>
             </Flex>
           </div>

@@ -1,4 +1,7 @@
-export function formatDate(date: string, includeRelative = true) {
+import { ui, type Locale } from "@/app/resources/i18n";
+
+export function formatDate(date: string, includeRelative = true, locale: Locale = "en") {
+  const t = ui[locale];
   const currentDate = new Date();
 
   if (!date.includes("T")) {
@@ -7,7 +10,7 @@ export function formatDate(date: string, includeRelative = true) {
 
   const givenDate = new Date(date);
 
-  const fullDate = givenDate.toLocaleDateString("en-US", {
+  const fullDate = givenDate.toLocaleDateString(t.dateLocale, {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -21,11 +24,11 @@ export function formatDate(date: string, includeRelative = true) {
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
   if (diffInDays === 0) {
-    return "Today";
+    return t.today;
   } else if (diffInDays === 1) {
-    return "Yesterday";
+    return t.yesterday;
   } else if (diffInDays < 7) {
-    return `${diffInDays} days ago`;
+    return t.daysAgo(diffInDays);
   } else {
     return fullDate;
   }

@@ -12,6 +12,7 @@ export {
 export {
   person,
   social,
+  resumes,
   newsletter,
   home,
   about,

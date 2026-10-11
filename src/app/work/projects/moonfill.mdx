@@ -1,80 +1,77 @@
 ---
-title: "Moonfill, Smart Automated Moonpull Form Filler"
+title: "Moonfill: Run a Moonpull Scan from Salesforce in One Click"
 publishedAt: "2025-10-23"
-summary: "Moonfill is a lightweight browser extension developed to automate repetitive tasks for the internal **Awin Global Integration** team. It seamlessly integrates with Salesforce to detect **Awin advertiser records**, extract key fields like the **MID** and **Country of the program**, and prefill a Microsoft Office form used by the integration team."
+summary: "Moonfill is a browser extension for the **Awin Global Integration** team. From a Salesforce record, one click submits the Moonpull integration scan, waits for the result and posts it in the record's **Chatter** feed automatically — no form to fill in, no copy and paste."
 images:
-- "/images/moonfill.png"
-
+- "/images/moonfill.webp"
 
 team:
   - name: "Rodier Sangibala"
-    role: "Author and developper"
-    avatar: "/images/ro.jpg"
+    role: "Author and developer"
+    avatar: "/images/ro-square.jpg"
 ---
 
 ## Overview
 
-Moonfill is a lightweight browser extension developed to automate repetitive tasks for the internal **Awin Global Integration** team.  
-It seamlessly integrates with Salesforce to detect **Awin advertiser records**, extract key fields like the **MID** and **Country of the program**, and prefill a Microsoft Office form used by the integration team.
+Moonfill is a browser extension built for Awin agents. Before, running a Moonpull integration scan meant filling in the Moonpull form, waiting for the result to arrive in Teams, copying it and pasting it into Salesforce.
 
-The tool eliminates manual copy–paste routines and reduces form completion time from minutes to seconds — improving accuracy and consistency across teams.
+Now an agent clicks one button on the program's record and Moonfill does all of it: it reads the program, **MID** and **country** from the record, submits the form, follows the scan and posts the result back in the record's Chatter feed.
 
 ---
 
-## Key Features
+## Why it is useful
 
-### 🧠 Context-Aware Detection
-Moonfill automatically detects when users are viewing a Salesforce record. Once the page is ready, it scans the DOM for relevant Awin fields such as the **Advertiser ID (MID)** and **Country of the program**, applying internal GEO logic to convert the country name into an international region code.
+- **One click.** No typing the MID or region, no form to fill in, no copy and paste.
+- **Nothing to remember.** The program, MID and country come straight from the Salesforce record.
+- **Time to do other things.** While a scan runs (usually up to 10 minutes) the agent can use other tabs and other apps.
+- **Several scans at once.** Scans can run in parallel, for the same client or different ones, and each result goes to its own record.
+- **Always visible.** One click on the extension icon shows what is running, what is done and what needs attention, with a history of the latest scans.
 
-### 🎨 Seamless UI Integration
-Moonfill includes a polished **HTML popup interface** that appears when users click the extension icon.  
-The popup allows users to manually enter the **MID**, select the **Region Geo Code** from a dropdown, and click a prominent **“Submit”** button to trigger the data injection.
+---
 
-![Moonfill Popup Interface](/images/moonfill.png)
+## How it works
 
-When a valid record is detected from the URL, Moonfill injects a visually integrated button directly into the Salesforce interface.
+1. On the program's Salesforce record, the agent clicks **Submit Moonpull form**.
+2. A form tab opens, fills itself in, submits and closes. This takes about 25 seconds, then the agent is back on the record.
+3. Moonfill waits for the scan to finish in the background.
+4. When the result is ready, Moonfill opens the record in the background, posts the result to its **Chatter** feed and shows a notification.
 
-![Moonfill Button](/images/button1.png)
+Each scan moves through clear states: submitting the form, in progress (with a live timer), posting to Salesforce, and complete. A failed scan says why, so the agent knows what to do next.
 
-The button sits naturally within the Salesforce card layout and allows one-click submission of prefilled forms.
+---
 
-### ⚠️ Smart Validation
-If the detected MID is invalid or shorter than 3 digits, Moonfill automatically disables interaction and shows a neutral grey state to prevent accidental submissions.
+## Built to be safe
 
-![Disabled Button for Invalid MID](/images/button2.png)
-
-### 🚀 One-Click Automation
-Upon activation, Moonfill opens the pre-configured Microsoft Form, fills in the relevant advertiser data, and submits automatically after confirming that all required fields are valid.  
-The form includes live validation logic and even detects the “thank you” confirmation message before closing the tab — ensuring a clean, uninterrupted workflow.
-
-### 💾 Persistent Local Storage
-Advertiser ID (MID) and GEO data are cached using Chrome’s local storage API to maintain quick access and cross-tab consistency without privacy risk.
+- **The result must match the scan.** Before posting, Moonfill checks that the result belongs to the MID that was scanned. If it does not, nothing is posted.
+- **A safety net for every failure.** If something goes wrong, a **Force paste** button and a **Copy result** button are one click away, and the Teams message still arrives as usual, so a copy always exists.
+- **Invalid records are blocked.** If the detected MID is missing or invalid, the button is disabled to prevent accidental submissions.
+- **Minimal footprint.** Moonfill only talks to Microsoft Forms, the Moonpull results folder and Salesforce, using the agent's own logins. The scan list is stored on the agent's computer only.
 
 ---
 
 ## Technologies Used
 
-- **JavaScript (ES6)** — Core logic and event handling  
-- **Chrome Extension APIs** — For background messaging, DOM injection, and storage  
-- **HTML & CSS** — Clean UI components styled to match Awin’s design language  
-- **Microsoft Forms** — Target form for automation and submission  
-- **Session Storage** — Used to store intermediate data during automation flow  
+- **JavaScript (ES6)** — core logic, state handling and event handling
+- **Browser extension APIs (Chrome and Edge)** — background messaging, tabs, notifications, DOM injection and storage
+- **HTML & CSS** — a compact popup showing running scans, results and history
+- **Salesforce (Chatter)** — record detection and result posting
+- **Microsoft Forms and Microsoft 365** — the form being submitted and the shared results folder being read
 
 ---
 
 ## Challenges and Learnings
 
-Developing a plugin that operates inside Salesforce’s dynamic and shadow-DOM-heavy environment required deep understanding of asynchronous DOM rendering.  
-Moonfill uses smart polling and conditional retries to detect when Salesforce elements are fully available before injecting its components.
+Working inside Salesforce's dynamic, shadow-DOM-heavy interface required a deep understanding of asynchronous rendering. Moonfill uses smart polling and conditional retries to wait until the right elements exist before it acts.
 
-Balancing reliability with performance — ensuring the button only appears when relevant fields exist — was one of the most rewarding aspects of the project.
+Reliability was the real challenge: scans take minutes, browsers get minimized, sessions expire and several scans can overlap. Designing for those cases — keeping every scan's state separate, recovering when the browser is reopened, and waiting politely when the browser is hidden because Salesforce cannot draw its page in the background — mattered more than the happy path.
 
 ---
 
 ## Outcome
 
-Moonfill has reduced average Moonpull form submission time by **over 80%**, helping the integration team optimize efficiency while maintaining data accuracy.  
-The tool has become a trusted internal assistant and continues to evolve with user feedback, supporting the wider automation goals across the Awin ecosystem.
+The first version of Moonfill cut Moonpull form submission time by **over 80%**. The current version goes further by removing the waiting, copying and pasting that came after the scan, while keeping data accurate through the MID check.
+
+It has become a trusted internal assistant for the integration team and continues to evolve with user feedback.
 
 ---
 

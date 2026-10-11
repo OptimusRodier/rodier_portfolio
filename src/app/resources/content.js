@@ -7,9 +7,10 @@ const person = {
     return `${this.firstName} ${this.lastName}`;
   },
   role: "System, Data and Integration Analyst",
-  avatar: "/images/ro.jpg",
+  avatar: "/images/ro-square.jpg",
   email: "rodier.sangibala@chezyo.com",
-  location: "Europe/Warsaw", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  location: "Paris", // City shown in the header (top left)
+  timeZone: "Europe/Paris", // IANA time zone used for the clock in the header
   languages: ["English", "French", "Lingala","Kikongo"], // optional: Leave the array empty if you don't want to display languages
 };
 
@@ -42,13 +43,12 @@ const social = [
     icon: "email",
     link: `mailto:${person.email}`,
   },
-  {
-    name: "Download PDF version",
-    icon: "document",
-    link: "/Rodier_Resume_Final.pdf", // Place resume.pdf inside /public folder
-    download: true, // Optional, some components might use this
-  },
-  
+];
+
+// Resume downloads: place both PDFs inside /public
+const resumes = [
+  { label: "ENG CV", link: "/New_Rodier_Resume_EN.pdf", fileName: "New_Rodier_Resume_EN.pdf" },
+  { label: "FR CV", link: "/New_Rodier_Resume_FR.pdf", fileName: "New_Rodier_Resume_FR.pdf" },
 ];
 
 const home = {
@@ -65,7 +65,7 @@ const home = {
   },
   subline: (
     <>
-      Founder of <a href="https://chezyo.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">chezyo.com</a>, Integration Analyst at <strong className="text-lg font-bold">Awin</strong>, and strategist helping brands connect data, platforms, and people through scalable systems — with clarity and precision.
+      Global Integrations Analyst at <strong className="text-lg font-bold">Awin</strong>, based in Paris, and strategist helping brands connect data, platforms, and people through scalable systems — with clarity and precision. Former founder of chezyo.com (2023–2025), now exploring new ideas at a local level.
     </>
   ),
 };
@@ -92,10 +92,15 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        I’m a systems, data, and integration analyst with a passion for making technology work seamlessly. At Awin Global, I specialize in brand integration, personally developing prebuilt tracking codes and plugins for e-commerce platforms and Google Tag Manager (GTM). I work directly with brands to ensure smooth transaction tracking, leveraging SQL to monitor performance and optimize implementations. My time at Awin has deepened my expertise in e-commerce tracking, cloud-server tracking, and API integrations, forming the backbone of my understanding of digital commerce and data-driven optimization.
-Beyond corporate experience, I’m also the Founder & CEO of Chezyo.com, an e-commerce platform in DR Congo, where I oversee tech operations, website management, and business strategy. Additionally, as a Co-founder and Board Member of LIFE TIME GROUP ENTERPRISE, I help turn ideas into businesses—either by launching them ourselves or crafting strategies for others to scale.
-I thrive at the crossroads of technology, strategy, and problem-solving. Whether it’s optimizing tracking setups, making data-driven decisions, or brainstorming new business models, I bring an analytical mind with a creative edge. Oh, and if there’s ever a tracking puzzle to solve, chances are, I’ve already built the solution.
-
+        <p>
+          I’m a systems, data, and integration analyst with a passion for making technology work seamlessly. At Awin Global, I specialize in brand integration, personally developing prebuilt tracking codes and plugins for e-commerce platforms and Google Tag Manager (GTM). I work directly with brands to ensure smooth transaction tracking, leveraging SQL to monitor performance and optimize implementations. My time at Awin has deepened my expertise in e-commerce tracking, cloud-server tracking, and API integrations, forming the backbone of my understanding of digital commerce and data-driven optimization.
+        </p>
+        <p>
+          Since September 2026 I’m based in Paris, France, continuing in the same team after an internal move. Beyond corporate experience, I founded and ran Chezyo.com, an e-commerce platform in DR Congo, from 2023 to 2025. I decommissioned it in 2025 to explore the ideas I had gathered and work on something new that fits the local level. I’m also a Co-founder and Board Member of LIFETIME GROUP ENTERPRISE, where I help turn ideas into businesses—either by launching them ourselves or crafting strategies for others to scale.
+        </p>
+        <p>
+          I thrive at the crossroads of technology, strategy, and problem-solving. Whether it’s optimizing tracking setups, making data-driven decisions, or brainstorming new business models, I bring an analytical mind with a creative edge. Oh, and if there’s ever a tracking puzzle to solve, chances are, I’ve already built the solution.
+        </p>
       </>
     ),
   },
@@ -106,48 +111,36 @@ I thrive at the crossroads of technology, strategy, and problem-solving. Whether
       {
         company: "Awin Global",
         timeframe: "August 2022 - Present",
-        role: "Global Technical Integrations Analyst",
+        role: "Global Integrations Analyst (formerly Global Technical Integrations Analyst)",
         achievements: [
           <>
-Led technical onboarding for 300+ brands, boosting implementation sign-offs by 537%.
-Implemented tracking via GTM, API, and plugins; used SQL for monitoring and reporting.
-
+            Led technical onboarding for 300+ brands, boosting implementation sign-offs by 537%.
+            Implemented tracking via GTM, API, and plugins; used SQL for monitoring and reporting.
           </>,
           <>
-          Improved team efficiency through training, documentation, and dashboard optimization.
+            Improved team efficiency through training, documentation, and dashboard optimization.
+          </>,
+          <>
+            Relocated to Paris, France in September 2026 through an internal move, with my tenure carried over and the same scope of work.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          //{
-           // src: "/images/projects/project-01/cover-01.jpg",
-            //alt: "Once UI Project",
-            //width: 16,
-            //height: 9,
-         // },-->
-        ],
+        images: [],
       },
       {
         company: "ChezYo Coo/chezyo.com",
-        timeframe: "March 2023 - Present",
+        timeframe: "March 2023 - 2025",
         role: "Founder & CEO",
         achievements: [
           <>
-Founder & CEO of <a href="https://chezyo.com" target="_blank" rel="noopener noreferrer">chezyo.com</a>, an e-commerce platform in DR Congo. 
-I built and financed the business, overseeing website development, tech operations, invoicing, and digital marketing. 
-
-With warehouses in Kinshasa and Lubumbashi, I manage logistics remotely while my team handles fulfillment and customer engagement
+            Founded and ran chezyo.com, an e-commerce platform in DR Congo.
+            I built and financed the business, overseeing website development, tech operations, invoicing, and digital marketing.
+            With warehouses in Kinshasa and Lubumbashi, I managed logistics remotely while my team handled fulfillment and customer engagement.
+          </>,
+          <>
+            Decommissioned the platform in 2025 to explore the ideas gathered along the way and work on something new that matches the local level.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          //{
-           // src: "/images/projects/project-01/cover-01.jpg",
-            //alt: "Once UI Project",
-            //width: 16,
-            //height: 9,
-         // },-->
-        ],
+        images: [],
       },
       {
         company: "Diebold Nixdorf",
@@ -351,4 +344,4 @@ const gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+export { person, social, resumes, newsletter, home, about, blog, work, gallery };

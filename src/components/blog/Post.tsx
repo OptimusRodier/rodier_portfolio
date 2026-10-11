@@ -3,21 +3,23 @@
 import { Column, Flex, Heading, SmartImage, SmartLink, Tag, Text } from '@/once-ui/components';
 import styles from './Posts.module.scss';
 import { formatDate } from '@/app/utils/formatDate';
+import { localePath, type Locale } from '@/app/resources/i18n';
 
 interface PostProps {
     post: any;
     thumbnail: boolean;
     direction?: "row" | "column";
+    locale?: Locale;
 }
 
-export default function Post({ post, thumbnail, direction }: PostProps) {
+export default function Post({ post, thumbnail, direction, locale = "en" }: PostProps) {
     return (
         <SmartLink
             fillWidth
             unstyled
             style={{ borderRadius: 'var(--radius-l)' }}
             key={post.slug}
-            href={`/blog/${post.slug}`}>
+            href={localePath(locale, `/blog/${post.slug}`)}>
             <Flex
                 position="relative"
                 transition="micro-medium"
@@ -35,7 +37,7 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
                         cursor="interactive"
                         radius="l"
                         src={post.metadata.image}
-                        alt={'Thumbnail of ' + post.metadata.title}
+                        alt={(locale === 'fr' ? 'Miniature de ' : 'Thumbnail of ') + post.metadata.title}
                         aspectRatio="16 / 9"
                     />
                 )}
@@ -53,7 +55,7 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
                     <Text
                         variant="label-default-s"
                         onBackground="neutral-weak">
-                        {formatDate(post.metadata.publishedAt, false)}
+                        {formatDate(post.metadata.publishedAt, false, locale)}
                     </Text>
                     { post.metadata.tag &&
                         <Tag

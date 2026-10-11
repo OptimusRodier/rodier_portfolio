@@ -1,4 +1,5 @@
-import { getPosts } from '@/app/utils/utils';
+import { getLocalizedPosts } from '@/app/utils/utils';
+import type { Locale } from '@/app/resources/i18n';
 import { Grid } from '@/once-ui/components';
 import Post from './Post';
 
@@ -7,15 +8,17 @@ interface PostsProps {
     columns?: '1' | '2' | '3';
     thumbnail?: boolean;
     direction?: 'row' | 'column';
+    locale?: Locale;
 }
 
 export function Posts({
     range,
     columns = '1',
     thumbnail = false,
-    direction
+    direction,
+    locale = 'en'
 }: PostsProps) {
-    let allBlogs = getPosts(['src', 'app', 'blog', 'posts']);
+    let allBlogs = getLocalizedPosts(locale, ['src', 'app', 'blog', 'posts']);
 
     const sortedBlogs = allBlogs.sort((a, b) => {
         return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
@@ -40,6 +43,7 @@ export function Posts({
                             post={post}
                             thumbnail={thumbnail}
                             direction={direction}
+                            locale={locale}
                         />
                     ))}
                 </Grid>

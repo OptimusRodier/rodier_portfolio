@@ -1,9 +1,15 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { Flex, IconButton, SmartLink, Text } from "@/once-ui/components";
-import { person, social } from "@/app/resources/content";
+import { getContent } from "@/app/resources/getContent";
+import { getLocaleFromPathname, ui } from "@/app/resources/i18n";
 import styles from "./Footer.module.scss";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const locale = getLocaleFromPathname(usePathname());
+  const { person, social, resumes } = getContent(locale);
 
   return (
     <Flex
@@ -27,7 +33,7 @@ export const Footer = () => {
           <Text paddingX="4">{person.name}</Text>
           <Text onBackground="neutral-weak">
             {/* Usage of this template requires attribution. Please don't remove the link to Once UI. */}
-            / Build your portfolio with{" "}
+            / {ui[locale].builtWith}{" "}
             <SmartLink
               href="https://once-ui.com/templates/magic-portfolio"
             >
@@ -40,15 +46,27 @@ export const Footer = () => {
             (item) =>
               item.link && (
                 <IconButton
-                  key={item.name}
+                  key={item.link}
                   href={item.link}
                   icon={item.icon}
                   tooltip={item.name}
+                  aria-label={item.name || item.icon}
                   size="s"
                   variant="ghost"
                 />
               ),
           )}
+          {resumes.map((cv) => (
+            <IconButton
+              key={cv.link}
+              href={cv.link}
+              icon="document"
+              tooltip={cv.label}
+              aria-label={cv.label}
+              size="s"
+              variant="ghost"
+            />
+          ))}
         </Flex>
       </Flex>
       <Flex height="80" show="s"></Flex>

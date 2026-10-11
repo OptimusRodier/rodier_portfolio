@@ -12,6 +12,9 @@ export interface MetaProps {
     name: string;
     url?: string;
   };
+  /** Paths of the same page in each language, e.g. { en: "/about", fr: "/fr/about" } */
+  alternates?: { en: string; fr: string };
+  locale?: "en" | "fr";
 }
 
 export function generateMetadata({
@@ -23,6 +26,8 @@ export function generateMetadata({
   image,
   publishedTime,
   author,
+  alternates,
+  locale,
 }: MetaProps): NextMetadata {
   const normalizedBaseURL = baseURL.endsWith("/") ? baseURL.slice(0, -1) : baseURL;
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
@@ -37,13 +42,28 @@ export function generateMetadata({
 
   const url = `${normalizedBaseURL}${normalizedPath}`;
 
+  const abs = (p: string) => `${normalizedBaseURL}${p.startsWith("/") ? p : `/${p}`}`;
+
   return {
     title,
     description,
+    ...(alternates
+      ? {
+          alternates: {
+            canonical: url,
+            languages: {
+              en: abs(alternates.en),
+              fr: abs(alternates.fr),
+              "x-default": abs(alternates.en),
+            },
+          },
+        }
+      : {}),
     openGraph: {
       title,
       description,
       type,
+      ...(locale ? { locale: locale === "fr" ? "fr_FR" : "en_US" } : {}),
       ...(publishedTime && type === "article" ? { publishedTime } : {}),
       url,
       images: [

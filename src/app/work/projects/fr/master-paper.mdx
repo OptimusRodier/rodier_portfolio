@@ -1,0 +1,42 @@
+---
+title: "Détection de la dérive conceptuelle dans les flux de données à l'aide de classifieurs ensemblistes"
+publishedAt: "2021-06-30"
+summary: "Une étude de modèles d'apprentissage automatique adaptatifs qui détectent la dérive conceptuelle dans des flux de données en temps réel, à l'aide de classifieurs ensemblistes et d'algorithmes de détection de dérive comme ADWIN, DDM et EDDM."
+images:
+- "/images/drift3.webp"
+
+team:
+  - name: "Rodier Sangibala"
+    role: "Auteur – Master en Intelligence computationnelle et fouille de données"
+    avatar: "/images/ro-square.jpg"
+---
+
+## Présentation
+
+Ce mémoire explore le défi de la dérive conceptuelle dans les environnements de données en flux, où l'évolution de la distribution des données au fil du temps dégrade les performances des modèles d'apprentissage automatique statiques. Le travail évalue comment des classifieurs ensemblistes associés à des algorithmes de détection de dérive peuvent s'adapter à ces changements et conserver leur précision prédictive.
+
+## Principales contributions
+
+- **Techniques de détection de dérive** : implémentation et test d'ADWIN, DDM et EDDM pour surveiller les changements dans des flux de données en temps réel et déclencher le réentraînement du modèle.
+- **Classifieurs ensemblistes** : utilisation d'apprenants ensemblistes pour construire des classifieurs adaptatifs qui maintiennent leurs performances à mesure que les données évoluent.
+- **Évaluation sur données réelles et synthétiques** : utilisation de Scikit-Multiflow et de Python pour simuler des environnements de flux réalistes, pour une validation à la fois contrôlée et pratique.
+- **Métriques de performance** : évaluation de la précision, du taux de faux positifs et de la capacité d'adaptation afin de comparer les algorithmes de détection dans des contextes dynamiques.
+
+## Technologies utilisées
+
+- **Python** : pour la simulation, l'entraînement des modèles et l'implémentation des algorithmes.
+- **Scikit-Multiflow** : framework spécialisé dans l'apprentissage sur flux et la détection de dérive.
+- **Jupyter Notebooks** : pour le développement itératif et la visualisation des résultats.
+- **Matplotlib / Seaborn** : pour l'analyse visuelle.
+
+## Défis et enseignements
+
+Les principaux défis ont consisté à équilibrer la sensibilité de la détection et la stabilité, et à concevoir des expériences qui simulent de façon réaliste des scénarios de dérive. Garantir des performances fiables à la fois sur des jeux de données synthétiques et réels a été un autre point critique. Ce projet m'a permis d'approfondir ma compréhension des systèmes d'apprentissage adaptatifs et des subtilités de la gestion de modèles en temps réel.
+
+## Résultat
+
+Le mémoire démontre que combiner l'apprentissage ensembliste avec une détection de dérive efficace peut améliorer sensiblement la robustesse des systèmes d'apprentissage automatique dans des environnements non stationnaires. Ces méthodes ont des applications potentielles dans la détection de fraude, la surveillance de réseaux et d'autres systèmes temps réel qui exigent une intelligence adaptative.
+
+## Référence
+
+[Ensemble methods in data streams processing](https://docs.google.com/document/d/1mD8Jld_hBiIRRY47I2kYAwvx1-FQVqdO/edit?usp=sharing&ouid=112783248229809000409&rtpof=true&sd=true)

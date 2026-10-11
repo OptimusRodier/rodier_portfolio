@@ -1,13 +1,15 @@
-import { getPosts } from "@/app/utils/utils";
+import { getLocalizedPosts } from "@/app/utils/utils";
+import { localePath, type Locale } from "@/app/resources/i18n";
 import { Column } from "@/once-ui/components";
 import { ProjectCard } from "@/components";
 
 interface ProjectsProps {
   range?: [number, number?];
+  locale?: Locale;
 }
 
-export function Projects({ range }: ProjectsProps) {
-  let allProjects = getPosts(["src", "app", "work", "projects"]);
+export function Projects({ range, locale = "en" }: ProjectsProps) {
+  let allProjects = getLocalizedPosts(locale, ["src", "app", "work", "projects"]);
 
   const sortedProjects = allProjects.sort((a, b) => {
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
@@ -23,7 +25,8 @@ export function Projects({ range }: ProjectsProps) {
         <ProjectCard
           priority={index < 2}
           key={post.slug}
-          href={`work/${post.slug}`}
+          href={localePath(locale, `/work/${post.slug}`)}
+          locale={locale}
           images={post.metadata.images}
           title={post.metadata.title}
           description={post.metadata.summary}

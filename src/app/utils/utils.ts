@@ -70,3 +70,19 @@ export function getPosts(customPath = ["", "", "", ""]) {
   const postsDir = path.join(process.cwd(), ...customPath);
   return getMDXData(postsDir);
 }
+
+/**
+ * Returns the posts for a locale. English files live in the folder itself,
+ * French translations live in a "fr" sub-folder with the SAME file name (same slug).
+ * A post with no French translation falls back to the English file.
+ */
+export function getLocalizedPosts(locale: "en" | "fr", customPath: string[]) {
+  const english = getPosts(customPath);
+  if (locale !== "fr") return english;
+
+  const frDir = path.join(process.cwd(), ...customPath, "fr");
+  if (!fs.existsSync(frDir)) return english;
+
+  const french = new Map(getMDXData(frDir).map((post) => [post.slug, post]));
+  return english.map((post) => french.get(post.slug) ?? post);
+}

@@ -56,7 +56,9 @@ export function Schema({
     url,
   };
   
-  schema.sameAs = Object.values(social).filter(Boolean)
+  schema.sameAs = social
+    .map((item) => item.link)
+    .filter((link) => link && !link.startsWith("mailto:"))
 
   if (as === "website") {
     schema.name = title;

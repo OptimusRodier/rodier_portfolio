@@ -3,11 +3,18 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Fade, Flex, Line, ToggleButton } from "@/once-ui/components";
+import { Fade, Flex, Icon, Line, ToggleButton } from "@/once-ui/components";
 import styles from "@/components/Header.module.scss";
 
 import { routes, display } from "@/app/resources";
-import { person, about, blog, work, gallery } from "@/app/resources/content";
+import { getContent } from "@/app/resources/getContent";
+import {
+  getLocaleFromPathname,
+  localePath,
+  stripLocale,
+  ui,
+  type Locale,
+} from "@/app/resources/i18n";
 import { ThemeToggle } from "./ThemeToggle";
 
 type TimeDisplayProps = {
@@ -19,18 +26,14 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" })
   const [currentTime, setCurrentTime] = useState("");
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone,
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-      };
-      const timeString = new Intl.DateTimeFormat(locale, options).format(now);
-      setCurrentTime(timeString);
-    };
+    const formatter = new Intl.DateTimeFormat(locale, {
+      timeZone,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
+    const updateTime = () => setCurrentTime(formatter.format(new Date()));
 
     updateTime();
     const intervalId = setInterval(updateTime, 1000);
@@ -43,8 +46,28 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" })
 
 export default TimeDisplay;
 
+/** EN | FR switch: keeps you on the same page, in the other language. */
+const LanguageSwitch = ({ locale, basePath }: { locale: Locale; basePath: string }) => (
+  <Flex gap="2" vertical="center" role="group" aria-label={ui[locale].switchLanguage}>
+    {(["en", "fr"] as const).map((l) => (
+      <ToggleButton
+        key={l}
+        size="s"
+        href={localePath(l, basePath)}
+        label={l.toUpperCase()}
+        selected={locale === l}
+        aria-label={ui[l].langName}
+        aria-current={locale === l ? "true" : undefined}
+      />
+    ))}
+  </Flex>
+);
+
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const locale = getLocaleFromPathname(pathname);
+  const basePath = stripLocale(pathname) || "/";
+  const { person, about, blog, work, gallery } = getContent(locale);
 
   return (
     <>
@@ -62,7 +85,12 @@ export const Header = () => {
         data-border="rounded"
       >
         <Flex paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
-          {display.location && <Flex hide="s">{person.location}</Flex>}
+          {display.location && (
+            <Flex hide="s" vertical="center" gap="8">
+              <Icon onBackground="accent-weak" name="globe" size="s" />
+              {person.location}
+            </Flex>
+          )}
         </Flex>
         <Flex fillWidth horizontal="center">
           <Flex
@@ -76,7 +104,12 @@ export const Header = () => {
           >
             <Flex gap="4" vertical="center" textVariant="body-default-s">
               {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
+                <ToggleButton
+                  prefixIcon="home"
+                  href={localePath(locale, "/")}
+                  selected={basePath === "/"}
+                  aria-label={locale === "fr" ? "Accueil" : "Home"}
+                />
               )}
               <Line background="neutral-alpha-medium" vert maxHeight="24" />
               {routes["/about"] && (
@@ -84,15 +117,16 @@ export const Header = () => {
                   <ToggleButton
                     className="s-flex-hide"
                     prefixIcon="person"
-                    href="/about"
+                    href={localePath(locale, "/about")}
                     label={about.label}
-                    selected={pathname === "/about"}
+                    selected={basePath === "/about"}
                   />
                   <ToggleButton
                     className="s-flex-show"
                     prefixIcon="person"
-                    href="/about"
-                    selected={pathname === "/about"}
+                    href={localePath(locale, "/about")}
+                    selected={basePath === "/about"}
+                    aria-label={about.label}
                   />
                 </>
               )}
@@ -101,15 +135,16 @@ export const Header = () => {
                   <ToggleButton
                     className="s-flex-hide"
                     prefixIcon="grid"
-                    href="/work"
+                    href={localePath(locale, "/work")}
                     label={work.label}
-                    selected={pathname.startsWith("/work")}
+                    selected={basePath.startsWith("/work")}
                   />
                   <ToggleButton
                     className="s-flex-show"
                     prefixIcon="grid"
-                    href="/work"
-                    selected={pathname.startsWith("/work")}
+                    href={localePath(locale, "/work")}
+                    selected={basePath.startsWith("/work")}
+                    aria-label={work.label}
                   />
                 </>
               )}
@@ -118,15 +153,16 @@ export const Header = () => {
                   <ToggleButton
                     className="s-flex-hide"
                     prefixIcon="book"
-                    href="/blog"
+                    href={localePath(locale, "/blog")}
                     label={blog.label}
-                    selected={pathname.startsWith("/blog")}
+                    selected={basePath.startsWith("/blog")}
                   />
                   <ToggleButton
                     className="s-flex-show"
                     prefixIcon="book"
-                    href="/blog"
-                    selected={pathname.startsWith("/blog")}
+                    href={localePath(locale, "/blog")}
+                    selected={basePath.startsWith("/blog")}
+                    aria-label={blog.label}
                   />
                 </>
               )}
@@ -135,24 +171,27 @@ export const Header = () => {
                   <ToggleButton
                     className="s-flex-hide"
                     prefixIcon="gallery"
-                    href="/gallery"
+                    href={localePath(locale, "/gallery")}
                     label={gallery.label}
-                    selected={pathname.startsWith("/gallery")}
+                    selected={basePath.startsWith("/gallery")}
                   />
                   <ToggleButton
                     className="s-flex-show"
                     prefixIcon="gallery"
-                    href="/gallery"
-                    selected={pathname.startsWith("/gallery")}
+                    href={localePath(locale, "/gallery")}
+                    selected={basePath.startsWith("/gallery")}
+                    aria-label={gallery.label}
                   />
                 </>
               )}
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
-                  <ThemeToggle />
+                  <ThemeToggle locale={locale} />
                 </>
               )}
+              <Line background="neutral-alpha-medium" vert maxHeight="24" />
+              <LanguageSwitch locale={locale} basePath={basePath} />
             </Flex>
           </Flex>
         </Flex>
@@ -164,7 +203,7 @@ export const Header = () => {
             textVariant="body-default-s"
             gap="20"
           >
-            <Flex hide="s">{display.time && <TimeDisplay timeZone={person.location} />}</Flex>
+            <Flex hide="s">{display.time && <TimeDisplay timeZone={person.timeZone} />}</Flex>
           </Flex>
         </Flex>
       </Flex>
